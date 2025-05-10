@@ -1,0 +1,68 @@
+<div class="space-y-6">
+    <h1>Carga de Archivos de Asistencia</h1>
+    
+    <div class="card">
+      <h2>Subir Archivo</h2>
+      
+      <div class="space-y-4">
+        <div>
+          <label for="fileInput">Seleccionar archivo (CSV o JSON)</label>
+          <input 
+            type="file" 
+            id="fileInput" 
+            accept=".csv,.json" 
+            (change)="onFileSelected($event)"
+          >
+        </div>
+        
+        <div *ngIf="selectedFile">
+          <p>Archivo seleccionado: {{ selectedFile.name }}</p>
+          <p>Tamaño: {{ selectedFile.size | number }} bytes</p>
+        </div>
+        
+        <button (click)="uploadFile()" [disabled]="!selectedFile">Subir Archivo</button>
+        
+        <div *ngIf="uploadProgress > 0 && uploadProgress < 100">
+          <p>Progreso: {{ uploadProgress }}%</p>
+          <div class="progress-container">
+            <div class="progress-bar" [style.width]="uploadProgress + '%'"></div>
+          </div>
+        </div>
+        
+        <div *ngIf="uploadError" class="alert error">
+          {{ uploadError }}
+        </div>
+        
+        <div *ngIf="uploadComplete" class="alert success">
+          Archivo procesado correctamente. {{ uploadedData.length }} registros cargados.
+        </div>
+      </div>
+    </div>
+    
+    <!-- Vista previa de datos -->
+    <div *ngIf="uploadedData.length > 0" class="card">
+      <h2>Vista Previa de Datos ({{ uploadedData.length }} registros)</h2>
+      
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of displayedColumns">{{ column }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of paginatedData">
+              <td *ngFor="let column of displayedColumns">{{ row[column] }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Controles de paginación -->
+        <div class="pagination-controls" *ngIf="uploadedData.length > pageSize">
+          <button (click)="previousPage()" [disabled]="currentPage === 0">Anterior</button>
+          <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+          <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,64 @@
+<div class="data-view-container">
+  <h1>Registro Detallado de Asistencia</h1>
+  
+  <!-- Filtros y botones de exportación -->
+  <div class="card">
+    <div class="grid grid-cols-3 gap-4">
+      <div>
+        <label for="search">Buscar:</label>
+        <input type="text" id="search" placeholder="Nombre..." 
+               [(ngModel)]="searchTerm" (input)="filterStudents()">
+      </div>
+      
+      <div>
+        <label for="grade">Filtrar por grado:</label>
+        <select id="grade" [(ngModel)]="selectedGrade" (change)="filterStudents()">
+          <option value="all">Todos los grados</option>
+          <option value="5°A">5°A</option>
+          <option value="5°B">5°B</option>
+          <option value="6°A">6°A</option>
+          <option value="6°B">6°B</option>
+          <option value="7°A">7°A</option>
+        </select>
+      </div>
+      
+      <div class="flex items-end gap-2">
+        <button class="btn-export" (click)="exportToExcel()">
+          <i class="fas fa-file-excel"></i> Exportar Excel
+        </button>
+        <button class="btn-export" (click)="exportToPDF()">
+          <i class="fas fa-file-pdf"></i> Exportar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tabla -->
+  <div class="card">
+    <div class="table-responsive">
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Grado</th>
+            <th>Asistencia Total</th>
+            <th *ngFor="let day of classDays">{{day}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of filteredStudents">
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.grade}}</td>
+            <td>{{calculateAttendance(student.attendance)}}</td>
+            <td *ngFor="let status of student.attendance" 
+                [class]="'attendance-' + status.toLowerCase()">
+              {{attendanceStatus[status]}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

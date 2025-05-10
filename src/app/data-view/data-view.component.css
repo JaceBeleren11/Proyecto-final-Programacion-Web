@@ -1,0 +1,294 @@
+/* data-view.component.css */
+
+/* Contenedor principal */
+.data-view-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Encabezado */
+.data-view-header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.data-view-header h1 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.data-view-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Filtros y controles */
+.data-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-label {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+/* Tabla mejorada */
+.data-table-container {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.data-table th {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid #eee;
+  position: sticky;
+  top: 0;
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Estilos para celdas especiales */
+.status-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  min-width: 80px;
+}
+
+.status-present {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-absent {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-late {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+/* Paginación */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.page-info {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.page-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Botones y controles */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #4361ee;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3a56d4;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  color: #2c3e50;
+}
+
+.btn-outline:hover {
+  background-color: #f8f9fa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .data-view-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .data-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .filter-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+/* Estilos para la tabla responsiva */
+.table-responsive {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Colores para los estados de asistencia */
+.attendance-p {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.attendance-a {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.attendance-j {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.attendance-t {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+/* Estilos para celdas */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+/* Alineación especial para primeras columnas */
+td:first-child, th:first-child,
+td:nth-child(2), th:nth-child(2),
+td:nth-child(3), th:nth-child(3),
+td:nth-child(4), th:nth-child(4) {
+  text-align: left;
+  position: sticky;
+  left: 0;
+  background: white;
+  z-index: 1;
+}
+
+th:first-child, th:nth-child(2),
+th:nth-child(3), th:nth-child(4) {
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  th, td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .card {
+    padding: 0.5rem;
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+/* Estilos para botones de exportación */
+.btn-export {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.btn-export:hover {
+  background-color: #1a252f;
+}
+
+.btn-export i {
+  font-size: 1rem;
+}
+
+/* Asegurar que Font Awesome esté disponible */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

@@ -1,0 +1,37 @@
+<header class="app-header">
+  <div class="header-container">
+    <div class="logo-container">
+      <a href="https://www.unicaribe.mx/"><img src="assets/unilogo.png" alt="Logo" class="logoimagen" *ngIf="isLoggedIn"></a>
+      <h1 class="logo-text">
+        <span class="highlight">Sistema</span> de Asistencia Escolar
+      </h1>
+    </div>
+    
+    
+    <!-- Menú de navegación (solo visible cuando isLoggedIn = true) -->
+    <nav *ngIf="isLoggedIn" class="nav-menu">
+      <ul class="nav-links">
+        <li *ngFor="let link of navLinks">
+          <a 
+            [routerLink]="link.path" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link"
+          >
+            <i [class]="link.icon"></i>
+            <span class="link-label">{{ link.label }}</span>
+          </a>
+        </li>
+      </ul>
+      
+      <button class="logout-button" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar sesión</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="app-main">
+  <router-outlet></router-outlet>
+</main>

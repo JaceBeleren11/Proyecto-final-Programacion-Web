@@ -1,0 +1,153 @@
+<div class="crud-container">
+  <h1>Gestión de Estudiantes</h1>
+  
+  <!-- Formulario para agregar nuevo estudiante -->
+  <div class="card">
+    <h2>Agregar Nuevo Estudiante</h2>
+    <form (ngSubmit)="addStudent()" class="form-grid">
+      <div class="form-group">
+        <label for="newName">Nombre Completo</label>
+        <input 
+          type="text" 
+          id="newName" 
+          [(ngModel)]="newStudent.name" 
+          name="newName" 
+          required
+          placeholder="Ej: Juan Pérez"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="newGrade">Grado</label>
+        <select id="newGrade" [(ngModel)]="newStudent.grade" name="newGrade" required>
+          <option value="" disabled selected>Seleccione un grado</option>
+          <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="newEmail">Correo Electrónico</label>
+        <input 
+          type="email" 
+          id="newEmail" 
+          [(ngModel)]="newStudent.email" 
+          name="newEmail" 
+          required
+          placeholder="ejemplo@escuela.com"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="newPhone">Teléfono</label>
+        <input 
+          type="tel" 
+          id="newPhone" 
+          [(ngModel)]="newStudent.phone" 
+          name="newPhone" 
+          placeholder="Ej: 555-1234567"
+        >
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-user-plus"></i> Agregar Estudiante
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Lista de estudiantes -->
+  <div class="card">
+    <h2>Lista de Estudiantes</h2>
+    
+    <!-- Formulario de edición -->
+    <div *ngIf="editingStudent" class="edit-section">
+      <h3>Editando Estudiante</h3>
+      <form (ngSubmit)="updateStudent()" class="form-grid">
+        <div class="form-group">
+          <label for="editName">Nombre</label>
+          <input 
+            type="text" 
+            id="editName" 
+            [(ngModel)]="editingStudent.name" 
+            name="editName" 
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="editGrade">Grado</label>
+          <select id="editGrade" [(ngModel)]="editingStudent.grade" name="editGrade" required>
+            <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input 
+            type="email" 
+            id="editEmail" 
+            [(ngModel)]="editingStudent.email" 
+            name="editEmail" 
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="editPhone">Teléfono</label>
+          <input 
+            type="tel" 
+            id="editPhone" 
+            [(ngModel)]="editingStudent.phone" 
+            name="editPhone"
+          >
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Guardar Cambios
+          </button>
+          <button type="button" class="btn btn-outline" (click)="cancelEdit()">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Tabla de estudiantes -->
+    <div class="table-responsive">
+      <table class="students-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Grado</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.grade }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone || 'N/A' }}</td>
+            <td class="actions-cell">
+              <button (click)="editStudent(student)" class="btn btn-outline btn-sm">
+                <i class="fas fa-edit"></i> Editar
+              </button>
+              <button (click)="deleteStudent(student.id)" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="students.length === 0">
+            <td colspan="6" class="empty-message">No hay estudiantes registrados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
